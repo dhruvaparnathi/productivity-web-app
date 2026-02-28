@@ -1,0 +1,585 @@
+@font-face {
+  font-family: Davigo;
+  src: url(./fonts-family/DavigoProDemo-Regular.ttf);
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Davigo;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+html,
+body {
+  width: 100%;
+  height: 100%;
+  color: var(--txtcolor);
+}
+body {
+  background-attachment: fixed;
+}
+:root {
+  --bg: linear-gradient(135deg, #1e1e2f, #2b2d42);
+  --card-bg: rgba(255, 255, 255, 0.06);
+  --glass: rgba(255, 255, 255, 0.08);
+  --sec: rgba(255, 255, 255, 0.04);
+  --prim: #6c63ff;
+  --accent: #a29bfe;
+  --green: #4ade80;
+  --red: #f43f5e;
+  --txtcolor: #f1f1f1;
+  --borderad: 20px;
+}
+
+.unshow {
+  display: none;
+}
+.show {
+  display: block;
+}
+
+main {
+  width: 100%;
+  min-height: 100vh;
+}
+main::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(circle at top right, rgba(108,99,255,0.15), transparent 60%);
+  pointer-events: none;
+}
+#screen {
+  min-height: 100vh;
+  background: var(--bg);
+  display: flex;
+  flex-direction: column;
+  padding: 40px 0;
+}
+#content0 {
+  width: 100%;
+  padding: 20px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+#navbar {
+  width: 90%;
+  height: 100%;
+  background: var(--sec);
+  border-radius: var(--borderad);
+  justify-self: center;
+}
+#homegrid {
+  width: 85%;
+  margin: 60px auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 35px;
+}
+.maindivs {
+  width: 100%;
+  height: 280px;
+  border-radius: var(--borderad);
+  position: relative;
+  overflow: hidden;
+}
+#navbar {
+  width: 85%;
+  margin: auto;
+  padding: 20px 30px;
+  background: var(--glass);
+  backdrop-filter: blur(12px);
+  border-radius: var(--borderad);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+}
+h1 {
+  margin-left: 2%;
+}
+#navbar button {
+  padding: 10px 25px;
+  border-radius: 30px;
+  background: var(--prim);
+  border: none;
+  font-weight: bold;
+  transition: 0.3s ease;
+}
+
+#navbar button:hover {
+  background: var(--accent);
+  transform: scale(1.1);
+  cursor: pointer;
+}
+.maindivs {
+  height: 300px;
+  border-radius: var(--borderad);
+  overflow: hidden;
+  position: relative;
+  cursor: pointer;
+  transition: all 0.4s ease;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.maindivs:hover {
+  box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+  transform: translateY(-12px) scale(1.04);
+}
+.maindivs::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+}
+.maindivs h3 {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  font-size: 1.6rem;
+  color: white;
+  z-index: 2;
+}
+.maindivs img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: var(--borderad);
+  display: block;
+}
+section {
+  animation: fadein 0.4s ease;
+}
+
+@keyframes fadein {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+.close {
+  position: relative;
+  padding: 10px 25px;
+  border: 2px solid var(--red);
+  border-radius: 25px;
+  background: transparent;
+  color: var(--txtcolor);
+  font-size: 16px;
+  font-weight: 900;
+  cursor: pointer;
+  overflow: hidden;
+}
+.close::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 0%;
+  background: var(--red);
+  transition: width 0.4s ease;
+  z-index: 0;
+}
+.close:hover::before {
+  width: 100%;
+}
+.close span {
+  position: relative;
+  z-index: 1;
+  pointer-events: none;
+}
+
+
+#plannerapp,
+#todoapp,
+#motivationapp,
+#pomodoroapp {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+}
+
+
+/* TO - DO */
+
+.hover-over {
+  border: 3px dashed var(--prim);
+}
+
+#todoapp {
+  background: var(--bg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  position: relative;
+  display: none;
+}
+#kanban0 {
+  width: 100%;
+  height: 10%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  overflow: hidden;
+}
+#addtask {
+  position: relative;
+  padding: 10px 25px;
+  border: 2px solid var(--green);
+  border-radius: 25px;
+  background: transparent;
+  color: var(--txtcolor);
+  font-size: 16px;
+  cursor: pointer;
+  overflow: hidden;
+}
+#addtask::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 0%;
+  background: var(--green);
+  transition: width 0.4s ease;
+  z-index: 0;
+}
+#addtask:hover::before {
+  width: 100%;
+}
+#addtask span {
+  position: relative;
+  z-index: 0.5;
+}
+#kanban1 {
+  width: 100%;
+  height: 90%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin-top: -20px;
+}
+.list {
+  width: 30%;
+  height: 90%;
+  background: var(--card-bg);
+  backdrop-filter: blur(20px);
+  box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+  border-radius: var(--borderad);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow-y: auto;
+  gap: 10px;
+}
+.sep {
+  width: 100%;
+  height: 10%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: transparent;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  padding: 10px 20px;
+}
+.task {
+  width: 95%;
+  height: 80px;
+  background: transparent;
+  border: 1px solid var(--prim);
+  border-radius: var(--borderad);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: flex-start;
+  padding: 0 10px;
+}
+.task button {
+  align-self: flex-end;
+  padding: 5px 15px;
+  border: none;
+  border-radius: var(--borderad);
+  background: var(--red);
+  color: var(--txtcolor);
+  font-size: medium;
+  cursor: pointer;
+}
+.task:hover {
+  cursor: grab;
+}
+#addtaskscreen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  display: none;
+}
+#addtaskscreen1 {
+  width: 400px;
+  height: 300px;
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%,-50%);
+  background: var(--sec);
+  border-radius: var(--borderad);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+}
+#taskname {
+  width: 80%;
+  padding: 10px;
+  border: none;
+  border-radius: var(--borderad);
+}
+#taskdesc {
+  width: 80%;
+  height: 80px;
+  padding: 10px;
+  border: none;
+  border-radius: var(--borderad);
+}
+#createtask {
+  padding: 10px 25px;
+  border: none;
+  border-radius: var(--borderad);
+  background: var(--prim);
+  color: var(--txtcolor);
+  font-size: medium;
+  cursor: pointer;
+}
+
+                                        /* Daily Planner */
+
+
+#plannerapp {
+  background: var(--bg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding-top: 20px;
+  gap: 40px;
+
+  display: none;
+}
+#plannerheader {
+  width: 100%;
+  height: 10%;
+  display: flex;
+  justify-content: space-evenly;
+  gap: 40%;
+  align-items: center;
+}
+#plannerheader h1 {
+  font-size: xx-large;
+}
+#dailyPlannerScreen {
+  width: 90%;
+  height: 80%;
+  background: var(--card-bg);
+  backdrop-filter: blur(12px);
+  border-radius: var(--borderad);
+  padding: 30px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  overflow-y: auto;
+  gap: 5px  ;
+}
+.plan{
+  width: 49%;
+  height: 80px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: var(--borderad);
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 20px;
+}
+.plan p {
+  position: absolute;
+  color: antiquewhite;
+  top: 5%;
+  left: 1%;
+  font-size: large;
+  margin-bottom: 20px;
+}
+.plan input {
+  color: whitesmoke;
+  width: 100%;
+  height: 100%;
+  padding: 20px 40px;
+  background: transparent;
+  font-size: x-large;
+  border: none;
+  border-radius: var(--borderad);
+  margin-left: -20px;
+  margin-top: 20px;
+}
+.plan input:focus {
+  outline: none;
+}
+
+                                          /* Motivational Quotes */
+
+#motivationapp {
+  background: var(--bg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+
+  display: none;
+}
+
+#motivationbody {
+  width: 90%;
+  height: 80%;
+  border-radius: var(--borderad);
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+#motivationbody h1 {
+  font-size: xx-large;
+  color: whitesmoke;
+  margin-bottom: 20px;
+}
+#motivationbody h3 {
+  font-size: x-large;
+  color: wheat;
+  text-align: center;
+  align-self: flex-end;
+  margin-right: 20%;
+}
+#spotlight{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    pointer-events: none;
+    background-image: radial-gradient(
+        200px at var(--x) var(--y),
+        rgba(255,255,255,0.15),
+        rgba(0,0,0,0.95)
+    );
+    /* background-image: radial-gradient(
+  var(--size) var(--size) at var(--x) var(--y),
+  rgba(255,255,255,0.15),
+  rgba(0,0,0,0.95)
+); */
+}
+
+#cursor {
+  width: 100px;
+  height: 100px;
+  position: absolute;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  transition: all 0.01s linear;
+}
+
+
+                                         /* Pomodoro Timer */
+
+
+#pomodoroapp {
+  background: var(--bg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  position: relative;
+  display: none;
+}
+#countdown{
+  width: 100%;
+  height: 26%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+}
+#countdown h1{
+  font-size: 100px;
+  font-weight: 100;
+}
+#countdown h3{
+  font-size: 30px;
+  font-weight: 700;
+  padding: 10px 12px;
+  cursor: pointer;
+  color: green;
+}
+#countdown h3:hover{
+  scale: 1.05;
+  transition: all 0.5s ease;
+}
+#work{
+  width: fit-content;
+  border: 4px solid #393e46;
+  border-radius: 8px;
+  background: rgba(108, 99, 255, 0.15);
+  border: 1px solid rgba(108, 99, 255, 0.3);
+}
+#timer{
+  width: 100%;
+  height: 10%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+#timestart,
+#timestop,
+#timereset {
+  padding: 12px 20px;
+  border: none;
+  background: var(--prim);
+  border-radius: 20px;
+  color: white;
+  font-size: larger;
+  font-weight: 900;
+  cursor: pointer;
+}
+.timing:hover{
+  scale: 1.1;
+  transition: all 0.5s ease;
+}
+.temp{
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-end;
+}
+.showout{
+  pointer-events: all;
+  position: absolute;
+  margin: 40px;
+  z-index: 1;
+}
+.temp{
+  pointer-events: none;
+}
