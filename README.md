@@ -62,7 +62,7 @@ Productivity Site/
 
 ## 🌍 Live Demo
 
-(Add deployment link here after deploying)
+https://productivity-site-app.netlify.app/
 
 ---
 
